@@ -9,6 +9,8 @@ const xhr = new XMLHttpRequest();
 xhr.open("GET", "https://jsonplaceholder.typicode.com/users")
 
 
+const container = document.querySelector('.container')
+
 xhr.addEventListener('load', ()=>{
     //! DATA
 
@@ -28,9 +30,22 @@ xhr.addEventListener('load', ()=>{
 
 
 
+function createListNames(obj){
+        const fragment = document.createDocumentFragment()
+    Object.values(obj).forEach(user => {
 
+        for(let prop in user){
+           if(user[prop] === user.name){
+               const li = document.createElement('li');
+               li.classList.add('list-group-item');
+               li.textContent = user.name;
+               fragment.appendChild(li)
+           }
+        }
+    })
 
-
+}
+createListNames(objOfUsers)
 
         function createNewCard(user){
            const card = document.createElement('div'); //* card
@@ -44,6 +59,12 @@ xhr.addEventListener('load', ()=>{
             cardTitle.classList.add('card-title');
             list.classList.add('list-group');
             listItem.classList.add('list-group-item');
+
+
+
+
+            const fragment = document.createDocumentFragment()
+
 
         }
 
