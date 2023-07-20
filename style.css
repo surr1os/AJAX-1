@@ -1,0 +1,18 @@
+:root{
+    --black:#333;
+    --white:#fff;
+
+}
+
+
+.list-group-item{
+    transition-property: background-color,color;
+    transition-delay: .2s;
+    transition-timing-function: ease-in-out;
+    cursor: pointer;
+}
+
+.list-group-item:hover{
+    background-color: var(--black);
+    color: var( --white);
+}

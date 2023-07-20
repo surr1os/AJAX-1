@@ -15,7 +15,8 @@ xhr.open("GET", "https://jsonplaceholder.typicode.com/users")
 
 xhr.addEventListener('load', ()=>{
     //! DATA
-
+    const container = document.createElement('div');
+    container.classList.add("container");
 
     const arrOfUsers = JSON.parse(xhr.responseText)
     console.log(arrOfUsers)
@@ -42,26 +43,25 @@ function createListNames(obj){
                li.classList.add('list-group-item');
                li.textContent = user.name;
                li.setAttribute("data-user-id", user.id)
+               fragment.appendChild(li)
+               li.addEventListener('click',()=>{
+                console.log('click')
 
-               li.addEventListener('click',({target})=>{
-                   e.preventDefault();
-                if(target.contains('list-group-item')){
-                 const userId = target.dataset.userId;
-                 //! По этому userId найти обьект в массиве и вывести данные пользователя в виде карточки
-                }
+
+                            createNewCard(user)
+
+
 
                })
-
-
-               fragment.appendChild(li)
            }
+
         }
+
     })
     const list = document.createElement('ul');
     list.classList.add('list-group');
     list.appendChild(fragment);
-    const container = document.createElement('div');
-    container.classList.add("container");
+
     container.appendChild(list);
     document.body.appendChild(container)
 
@@ -73,36 +73,45 @@ function createListNames(obj){
 
 
 //! EVENTS
-    createListNames(objOfUsers)
+
 
         function createNewCard(user){
            const card = document.createElement('div');
            const cardBody = document.createElement('div');
+           const cardText = document.createElement('div');
            const cardTitle = document.createElement('h5');
            const list = document.createElement('ul');
-           const listItems = document.createDocumentFragment()
-            const listItem = document.createElement('li');
-            card.classList.add('card');
-            cardBody.classList.add('cardBody');
+           // const listItems = document.createDocumentFragment()
+           //  const listItem = document.createElement('li');
+            card.classList.add("card", "m-auto", "mt-3", "text-center");
+            card.style.width = '50rem'
+            cardBody.classList.add('card-body');
+            cardText.classList.add('card-text')
             cardTitle.classList.add('card-title');
             list.classList.add('list-group');
-            listItem.classList.add('list-group-item');
+            // listItem.classList.add('list-group-item');
 
-
-
+            cardTitle.textContent = user.name;
+            cardText.textContent = "SOME TEXTTTTTTTTTTTT"
+            console.log(cardTitle.textContent)
 
             const fragment = document.createDocumentFragment()
 
-            fragment.appendChild(card);
-            fragment.appendChild(cardBody);
-            fragment.appendChild(cardTitle);
-            fragment.appendChild(list);
-            fragment.appendChild(listItems)
+            cardBody.appendChild(cardTitle);
+            cardBody.appendChild(cardText)
+            card.appendChild(cardBody)
 
 
+            fragment.appendChild(card)
+            // fragment.appendChild(list);
+            // fragment.appendChild(listItems)
+
+
+
+        container.appendChild(fragment)
         }
 
-
+    createListNames(objOfUsers)
 })
 
 xhr.send()
