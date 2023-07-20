@@ -46,15 +46,9 @@ function createListNames(obj){
                fragment.appendChild(li)
                li.addEventListener('click',()=>{
                 console.log('click')
-
-
                             createNewCard(user)
-
-
-
                })
            }
-
         }
 
     })
@@ -67,9 +61,6 @@ function createListNames(obj){
 
 }
 //! UI ELEMENTS
-
-
-
 
 
 //! EVENTS
@@ -100,14 +91,9 @@ function createListNames(obj){
             cardBody.appendChild(cardTitle);
             cardBody.appendChild(cardText)
             card.appendChild(cardBody)
-
-
             fragment.appendChild(card)
             // fragment.appendChild(list);
             // fragment.appendChild(listItems)
-
-
-
         container.appendChild(fragment)
         }
 
