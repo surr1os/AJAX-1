@@ -26,9 +26,6 @@ xhr.addEventListener('load', ()=>{
         return acc
     },{}) //! Забыл указать {} в конце, поэтому была ошибка
 
-
-
-
     console.log(objOfUsers)
 
 
@@ -75,7 +72,7 @@ function createListNames(obj){
            // const listItems = document.createDocumentFragment()
            //  const listItem = document.createElement('li');
             card.classList.add("card", "m-auto", "mt-3", "text-center");
-            card.style.width = '50rem'
+            card.style.width = '40rem'
             cardBody.classList.add('card-body');
             cardText.classList.add('card-text')
             cardTitle.classList.add('card-title');
