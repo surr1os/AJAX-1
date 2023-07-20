@@ -41,6 +41,18 @@ function createListNames(obj){
                const li = document.createElement('li');
                li.classList.add('list-group-item');
                li.textContent = user.name;
+               li.setAttribute("data-user-id", user.id)
+
+               li.addEventListener('click',({target})=>{
+                   e.preventDefault();
+                if(target.contains('list-group-item')){
+                 const userId = target.dataset.userId;
+                 //! По этому userId найти обьект в массиве и вывести данные пользователя в виде карточки
+                }
+
+               })
+
+
                fragment.appendChild(li)
            }
         }
@@ -68,8 +80,8 @@ function createListNames(obj){
            const cardBody = document.createElement('div');
            const cardTitle = document.createElement('h5');
            const list = document.createElement('ul');
-           const listItem = document.createElement('li');
-
+           const listItems = document.createDocumentFragment()
+            const listItem = document.createElement('li');
             card.classList.add('card');
             cardBody.classList.add('cardBody');
             cardTitle.classList.add('card-title');
@@ -80,6 +92,12 @@ function createListNames(obj){
 
 
             const fragment = document.createDocumentFragment()
+
+            fragment.appendChild(card);
+            fragment.appendChild(cardBody);
+            fragment.appendChild(cardTitle);
+            fragment.appendChild(list);
+            fragment.appendChild(listItems)
 
 
         }
