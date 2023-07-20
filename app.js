@@ -48,20 +48,20 @@ function createListNames(obj){
     const list = document.createElement('ul');
     list.classList.add('list-group');
     list.appendChild(fragment);
-
-    return list;
+    const container = document.createElement('div');
+    container.classList.add("container");
+    container.appendChild(list);
+    document.body.appendChild(container)
 
 }
 //! UI ELEMENTS
 
-    const container = document.createElement('div');
-    container.classList.add("container");
-    const listNames = createListNames(objOfUsers)
+
+
 
 
 //! EVENTS
-    container.appendChild(listNames)
-    document.body.appendChild(container)
+    createListNames(objOfUsers)
 
         function createNewCard(user){
            const card = document.createElement('div');
