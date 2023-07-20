@@ -1,7 +1,7 @@
 //* Получить пользователей (users) от сервера https://jsonplaceholder.typicode.com.
 //* получив ответ от сервера, вывести имена пользователей на страницу.
-//? При клике на имя пользователя, в произвольном месте должна появиться подробная информация о нем.
-//?  Для визуальной части можно использовать bootstrap или другие фреймворки.
+//! При клике на имя пользователя, в произвольном месте должна появиться подробная информация о нем.
+
 
 
 const xhr = new XMLHttpRequest();
@@ -9,7 +9,9 @@ const xhr = new XMLHttpRequest();
 xhr.open("GET", "https://jsonplaceholder.typicode.com/users")
 
 
-const container = document.querySelector('.container')
+
+
+
 
 xhr.addEventListener('load', ()=>{
     //! DATA
@@ -43,16 +45,30 @@ function createListNames(obj){
            }
         }
     })
+    const list = document.createElement('ul');
+    list.classList.add('list-group');
+    list.appendChild(fragment);
+
+    return list;
 
 }
-createListNames(objOfUsers)
+//! UI ELEMENTS
+
+    const container = document.createElement('div');
+    container.classList.add("container");
+    const listNames = createListNames(objOfUsers)
+
+
+//! EVENTS
+    container.appendChild(listNames)
+    document.body.appendChild(container)
 
         function createNewCard(user){
-           const card = document.createElement('div'); //* card
-           const cardBody = document.createElement('div'); // body
-           const cardTitle = document.createElement('h5'); // tit
-            const list = document.createElement('ul');
-            const listItem = document.createElement('li');
+           const card = document.createElement('div');
+           const cardBody = document.createElement('div');
+           const cardTitle = document.createElement('h5');
+           const list = document.createElement('ul');
+           const listItem = document.createElement('li');
 
             card.classList.add('card');
             cardBody.classList.add('cardBody');
@@ -67,10 +83,6 @@ createListNames(objOfUsers)
 
 
         }
-
-    //! UI ELEMENTS
-    const container = document.createElement('div');
-    container.classList.add("container");
 
 
 })
