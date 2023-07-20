@@ -5,18 +5,18 @@
 
 
 const xhr = new XMLHttpRequest();
-
 xhr.open("GET", "https://jsonplaceholder.typicode.com/users")
-
-
-
-
 
 
 xhr.addEventListener('load', ()=>{
     //! DATA
     const container = document.createElement('div');
     container.classList.add("container");
+
+    const userInfoContainer = document.createElement('div')
+    userInfoContainer.classList.add('user-info')
+
+
 
     const arrOfUsers = JSON.parse(xhr.responseText)
     console.log(arrOfUsers)
@@ -42,8 +42,18 @@ function createListNames(obj){
                li.setAttribute("data-user-id", user.id)
                fragment.appendChild(li)
                li.addEventListener('click',()=>{
-                console.log('click')
-                            createNewCard(user)
+                   console.log('click');
+
+                   // const userId = target.dataset.userId;
+
+                   if(userInfoContainer.innerHTML === ""){
+                       createNewCard(user)
+                   }else{
+                       const card = document.querySelector('.card')
+                       userInfoContainer.removeChild(card);
+                       createNewCard(user)
+                   }
+
                })
            }
         }
@@ -73,6 +83,7 @@ function createListNames(obj){
            //  const listItem = document.createElement('li');
             card.classList.add("card", "m-auto", "mt-3", "text-center");
             card.style.width = '40rem'
+            card.setAttribute("data-card-id", user.id)
             cardBody.classList.add('card-body');
             cardText.classList.add('card-text')
             cardTitle.classList.add('card-title');
@@ -89,9 +100,14 @@ function createListNames(obj){
             cardBody.appendChild(cardText)
             card.appendChild(cardBody)
             fragment.appendChild(card)
+
+
+userInfoContainer.appendChild(card)
             // fragment.appendChild(list);
             // fragment.appendChild(listItems)
-        container.appendChild(fragment)
+      container.insertAdjacentElement('beforeend',userInfoContainer)
+
+
         }
 
     createListNames(objOfUsers)
