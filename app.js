@@ -72,8 +72,26 @@ function createListNames(obj){
 
 //! EVENTS
 
+        function createFilterObj(user){
+            const talbeSchema = {
+                name:"name",
+                email:"email",
+                phone:"phone",
+                username:"usern",
+                website:"web",
+            }
+
+            return Object.keys(talbeSchema).reduce((acc, key) => {
+                if (key in user) {
+                    acc[key] = user[key]
+                }
+                return acc
+            }, {})
+        }
+
 
         function createNewCard(user){
+
            const card = document.createElement('div');
            const cardBody = document.createElement('div');
            const cardText = document.createElement('div');
@@ -91,11 +109,24 @@ function createListNames(obj){
             // listItem.classList.add('list-group-item');
 
             cardTitle.textContent = user.name;
-            cardText.textContent = "SOME TEXTTTTTTTTTTTT"
+
+            const filteredObj = createFilterObj(user)
+
+
+
+                for (let prop in filteredObj){
+                    const li = document.createElement('li')
+                    li.classList.add('list-group-item')
+                    li.textContent = `${prop}: ${filteredObj[prop]}`
+                    list.appendChild(li);
+                }
+
+
             console.log(cardTitle.textContent)
 
             const fragment = document.createDocumentFragment()
 
+            cardText.appendChild(list);
             cardBody.appendChild(cardTitle);
             cardBody.appendChild(cardText)
             card.appendChild(cardBody)
