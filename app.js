@@ -1,6 +1,6 @@
 //* Получить пользователей (users) от сервера https://jsonplaceholder.typicode.com.
 //* получив ответ от сервера, вывести имена пользователей на страницу.
-//! При клике на имя пользователя, в произвольном месте должна появиться подробная информация о нем.
+//* При клике на имя пользователя, в произвольном месте должна появиться подробная информация о нем.
 
 
 
@@ -15,8 +15,6 @@ xhr.addEventListener('load', ()=>{
 
     const userInfoContainer = document.createElement('div')
     userInfoContainer.classList.add('user-info')
-
-
 
     const arrOfUsers = JSON.parse(xhr.responseText)
     console.log(arrOfUsers)
@@ -42,10 +40,6 @@ function createListNames(obj){
                li.setAttribute("data-user-id", user.id)
                fragment.appendChild(li)
                li.addEventListener('click',()=>{
-                   console.log('click');
-
-                   // const userId = target.dataset.userId;
-
                    if(userInfoContainer.innerHTML === ""){
                        createNewCard(user)
                    }else{
@@ -53,11 +47,9 @@ function createListNames(obj){
                        userInfoContainer.removeChild(card);
                        createNewCard(user)
                    }
-
                })
            }
         }
-
     })
     const list = document.createElement('ul');
     list.classList.add('list-group');
@@ -68,8 +60,6 @@ function createListNames(obj){
 
 }
 //! UI ELEMENTS
-
-
 //! EVENTS
 
         function createFilterObj(user){
@@ -80,7 +70,6 @@ function createListNames(obj){
                 username:"usern",
                 website:"web",
             }
-
             return Object.keys(talbeSchema).reduce((acc, key) => {
                 if (key in user) {
                     acc[key] = user[key]
@@ -88,7 +77,6 @@ function createListNames(obj){
                 return acc
             }, {})
         }
-
 
         function createNewCard(user){
 
@@ -112,18 +100,13 @@ function createListNames(obj){
 
             const filteredObj = createFilterObj(user)
 
-
-
                 for (let prop in filteredObj){
                     const li = document.createElement('li')
                     li.classList.add('list-group-item')
                     li.textContent = `${prop}: ${filteredObj[prop]}`
                     list.appendChild(li);
                 }
-
-
             console.log(cardTitle.textContent)
-
             const fragment = document.createDocumentFragment()
 
             cardText.appendChild(list);
@@ -131,14 +114,8 @@ function createListNames(obj){
             cardBody.appendChild(cardText)
             card.appendChild(cardBody)
             fragment.appendChild(card)
-
-
-userInfoContainer.appendChild(card)
-            // fragment.appendChild(list);
-            // fragment.appendChild(listItems)
-      container.insertAdjacentElement('beforeend',userInfoContainer)
-
-
+            userInfoContainer.appendChild(card)
+            container.insertAdjacentElement('beforeend',userInfoContainer)
         }
 
     createListNames(objOfUsers)
