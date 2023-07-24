@@ -41,8 +41,8 @@
                             if(userInfoContainer.innerHTML === ""){
                                 createNewCard(user)
                             }else{
-                                const card = document.querySelector('.card')
-                                userInfoContainer.removeChild(card);
+
+                                userInfoContainer.innerHTML = ""
                                 createNewCard(user)
                             }
                         })
@@ -125,26 +125,35 @@
             xhr.send(JSON.stringify(body))
         }
             const btnPost = document.querySelector('.btn-add-post');
-
+            const form = document.forms['addUser'];
             btnPost.addEventListener('click', (e) => {
                 e.preventDefault();
-                const form = document.forms['addTask'];
-                const inputName = form.elements['name'];
-                const inputEmail = form.elements['email'];
-                const inputPhone = form.elements['phone'];
-                const inputWebsite = form.elements['website'];
+
+                const inputName = form.elements['name'].value;
+                const inputEmail = form.elements['email'].value;
+                const inputPhone = form.elements['phone'].value;
+                const inputWebsite = form.elements['website'].value;
+
+
+
+                if(!inputName || !inputEmail || !inputPhone || !inputWebsite){
+                    alert("Вы заполнили не все поля");
+                    return;
+                }
 
                 const newUser = {
-                    name: inputName.value,
-                    email: inputEmail.value,
-                    phone: inputPhone.value,
-                    website: inputWebsite.value,
+                    name: inputName,
+                    email: inputEmail,
+                    phone: inputPhone,
+                    website: inputWebsite,
                 }
                 postUser(newUser, (e)=>{
                     console.log(e);
                 })
                 createNewCard(newUser)
+                form.reset();
             })
+
     })
 
     xhr.send();
